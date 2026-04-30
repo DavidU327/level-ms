@@ -10,11 +10,16 @@ Route::middleware(['auth.jwt', 'role:'.Rol::ADMIN])->group(function () {
     Route::get('levels', \App\Http\Controllers\LevelIndexController::class.'@index')->name('levels.index');
     Route::post('levels', \App\Http\Controllers\LevelStoreController::class.'@create')->name('levels.create');
     Route::put('levels/{level}', \App\Http\Controllers\LevelUpdateController::class.'@update')->name('levels.update');
-    
+
+});
+
+Route::post('user-level-init', \App\Http\Controllers\UserLevelController::class.'@storeInit')->name('userLevel.init'); //Nivel solo cuando se registra
+
+Route::middleware(['auth.jwt', 'role:'.Rol::USER])->group(function () {
+    Route::post('user-levels', [UserLevelController::class, 'store']);
 });
 
 Route::middleware('auth.jwt')->group(function () {
     Route::get('user-levels', [UserLevelController::class, 'index']);
-    Route::post('user-levels', [UserLevelController::class, 'store']);
     Route::delete('user-levels', [UserLevelController::class, 'destroy']);
 });

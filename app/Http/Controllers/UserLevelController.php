@@ -12,6 +12,16 @@ class UserLevelController extends Controller
         return response()->json(UserLevel::all());
     }
 
+    public function storeInit(Request $request)
+    {
+        $userLevel = new UserLevel();
+        $userLevel->user_id = $request->user_id;
+        $userLevel->level_id = 1;
+        $userLevel->save();
+
+        return response()->json($userLevel, 201);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
