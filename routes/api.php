@@ -9,7 +9,7 @@ Route::middleware(['auth.jwt', 'role:'.Rol::ADMIN])->group(function () {
     Route::post('levels', \App\Http\Controllers\LevelStoreController::class.'@create')->name('levels.create');
     Route::put('levels/{level}', \App\Http\Controllers\LevelUpdateController::class.'@update')->name('levels.update');
     Route::patch('update-user-level', \App\Http\Controllers\UserLevelController::class.'@updateLevelUser')->name('levels.updateLevelUser'); //Actualizar nivel
-
+    Route::get("level-user-dashboard", \App\Http\Controllers\DashboardController::class.'@levelDashboard')->name('levels.dashboard'); //Nivel dashboard
 });
 
 Route::post('user-level-init', \App\Http\Controllers\UserLevelController::class.'@storeInit')->name('userLevel.init'); //Nivel solo cuando se registra

@@ -9,4 +9,9 @@ class UserLevel extends Model
     protected $primaryKey = null;
     public $incrementing = false;
     public $timestamps = true;
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
 }

@@ -11,4 +11,9 @@ class Level extends Model
         'max_point',
         'min_point',
     ];
+
+    public function userLevels()
+    {
+        return $this->hasMany(UserLevel::class, 'level_id', 'id');
+    }
 }
