@@ -13,6 +13,12 @@ class UserLevelController extends Controller
         return response()->json(UserLevel::all());
     }
 
+    public function levelMe($user)
+    {
+        $userLevel = UserLevel::where('user_id', $user)->first();
+        return response()->json($userLevel);
+    }
+
     public function storeInit(Request $request)
     {
         $userLevel = new UserLevel();

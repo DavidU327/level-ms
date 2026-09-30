@@ -16,6 +16,8 @@ Route::post('user-level-init', \App\Http\Controllers\UserLevelController::class.
 
 Route::middleware(['auth.jwt', 'role:'.Rol::USER])->group(function () {
     Route::post('user-levels', [UserLevelController::class, 'store']);
+    Route::get('level-me/{user}', [UserLevelController::class, 'levelMe']); //Ver mi nivel
+    Route::get('all-levels-user', \App\Http\Controllers\LevelIndexController::class.'@index')->name('levels.index'); //niveles usuario
 });
 
 Route::middleware('auth.jwt')->group(function () {
