@@ -1,0 +1,19 @@
+{
+  "backendStories": [
+    {
+      "id": "hu16-creacion-niveles",
+      "title": "HU-16 Creación de niveles",
+      "filter": "test_admin_can_create_level",
+      "sprint": 2,
+      "enabled": true
+    },
+    {
+      "id": "hu35-visualizacion-nivel",
+      "title": "HU-35 Visualización de nivel",
+      "filter": "test_user_can_view_available_levels_and_current_user_level",
+      "sprint": 5,
+      "enabled": true
+    }
+  ]
+}
+
