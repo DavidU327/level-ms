@@ -37,6 +37,17 @@ class LevelManagementTest extends TestCase
             'min_point' => 0,
             'max_point' => 100,
         ]);
+
+        Level::creating(function () {
+            throw new \RuntimeException('Simulated creation error');
+        });
+        $errorResponse = $this->postJson('/api/levels', [
+            'name' => 'Nivel Error',
+            'min_point' => 10,
+            'max_point' => 50,
+        ]);
+        $errorResponse->assertStatus(400);
+        Level::flushEventListeners();
     }
 
     public function test_user_can_view_available_levels_and_current_user_level(): void
