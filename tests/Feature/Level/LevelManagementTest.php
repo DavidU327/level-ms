@@ -70,6 +70,36 @@ class LevelManagementTest extends TestCase
         $myLevelResponse->assertOk();
         $myLevelResponse->assertJsonPath('user_id', 15);
         $myLevelResponse->assertJsonPath('level_id', $level2->id);
+
+        $initResponse = $this->postJson('/api/user-level-init', ['user_id' => 25]);
+        $initResponse->assertCreated();
+
+        $updateResponse = $this->patchJson('/api/update-user-level', [
+            'user_id' => 25,
+            'points' => 150,
+        ]);
+        $updateResponse->assertCreated();
+
+        $notFoundLevelResponse = $this->patchJson('/api/update-user-level', [
+            'user_id' => 25,
+            'points' => 99999,
+        ]);
+        $notFoundLevelResponse->assertStatus(404);
+
+        $allUserLevelsResponse = $this->getJson('/api/user-levels');
+        $allUserLevelsResponse->assertOk();
+
+        $storeUserLevelResponse = $this->postJson('/api/user-levels', [
+            'user_id' => 30,
+            'level_id' => $level1->id,
+        ]);
+        $storeUserLevelResponse->assertCreated();
+
+        $deleteUserLevelResponse = $this->deleteJson('/api/user-levels', [
+            'user_id' => 30,
+            'level_id' => $level1->id,
+        ]);
+        $deleteUserLevelResponse->assertNoContent();
     }
 }
 

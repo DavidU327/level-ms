@@ -9,6 +9,7 @@ class UserLevel extends Model
     protected $primaryKey = null;
     public $incrementing = false;
     public $timestamps = true;
+    protected $fillable = ['user_id', 'level_id'];
 
     public function level()
     {
